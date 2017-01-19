@@ -1,0 +1,28 @@
+<% content_for :title do %>
+トーク画面
+<% end %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 well">
+    <form action="<%= delete_all_post_path %>" method="post">
+      <button type="submit" class="btn btn-danger btn-xs pull-right">削除</button>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    </form>
+
+    <% @posts.each do |post| %>
+    <div class="media">
+      <div class="media-left">
+        <a href="#">
+          <img class="media-object img-circle" src="<%= "/images/#{post.user.image}" %>" width=64 height=64>
+        </a>
+      </div>
+      <div class="media-body">
+        <h5 class="media-heading"><%= post.user.name %>　<small><%= post.created_at %></small></h5>
+        <p><%= post.message %></p>
+      </div>
+    </div>
+    <% end %>
+
+    <a href="<%= new_post_path %>" class="btn btn-primary btn-space-30 btn-block">メッセージ作成</a>
+  </div>
+</div>
